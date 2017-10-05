@@ -1,0 +1,43 @@
+<br />
+<h1 style="text-align:center" class="neontitle">
+  <span class="glyphicon glyphicon-film"></span> <%= @movie.name %> <span class="glyphicon glyphicon-film"></span> 
+</h1>
+<br class="clear"/>
+
+<div class="col-xs-10 col-xs-offset-1 neon-box">
+  <div class="col-xs-4 col-xs-offset-2">
+    <h3>
+      <span class="glyphicon glyphicon-film"></span> Release Year: <%= @movie.release_year %>
+    </h3>
+  </div>
+  <div class="col-xs-5 col-xs-offset-1">
+    <h3>
+      <span class="glyphicon glyphicon-film"></span> Rating: 
+      <% @movie.rating.times do %>
+        <span class="glyphicon glyphicon-star"></span>
+      <% end %>
+      <% if @movie.rating < 5 %>
+        <% (5 - @movie.rating).times do %>
+          <span class="glyphicon glyphicon-star-empty"></span>
+        <% end %>
+      <% end %>
+    </h3>
+  </div>
+  <br />
+  <br />
+  <br />
+  <div class="col-xs-10 col-xs-offset-1">
+    <p><%= @movie.review %></p>
+  </div>
+  <br />
+  <% if current_user && current_user == @movie.user %>
+    <br />
+    <div class="pull-left">
+      <%= link_to "Edit", edit_movie_path(@movie), :class => "btn neonbtn" %>
+    </div>
+    <div class="pull-right">
+      <%= link_to "Delete", movie_path(@movie), :method => :delete, :data => {:confirm => "Are you sure you want to delete this?"},:class => "btn neonbtn" %>
+    </div>
+    <br />
+  <% end %>
+</div>

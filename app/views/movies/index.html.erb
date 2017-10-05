@@ -7,7 +7,7 @@
 <% @movies.each do |m| %>
 
   <div class="col-xs-10 col-xs-offset-1 neon-box">
-    <h2><%= m.name %></h2><br />
+    <h2><%= link_to m.name, movie_path(m) %></h2><br />
     
       <div class="col-xs-5 col-xs-offset-1">
         <h3><span class="glyphicon glyphicon-film"></span> Release Year: <%= m.release_year %></h3>
