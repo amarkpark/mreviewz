@@ -2,7 +2,7 @@
 <h1 style="text-align:center" class="neontitle">
   <span class="glyphicon glyphicon-film"></span> <%= @movie.name %> <span class="glyphicon glyphicon-film"></span> 
 </h1>
-<br class="clear"/>
+<br class="clear" />
 
 <div class="col-xs-10 col-xs-offset-1 neon-box">
   <div class="col-xs-4 col-xs-offset-2">
@@ -31,7 +31,7 @@
   </div>
   <br />
   <% if current_user && current_user == @movie.user %>
-    <br />
+    <br class="clear" />
     <div class="pull-left">
       <%= link_to "Edit", edit_movie_path(@movie), :class => "btn neonbtn" %>
     </div>
