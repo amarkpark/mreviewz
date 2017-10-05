@@ -1,9 +1,10 @@
 class MoviesController < ApplicationController
   before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy]
   before_action :set_movie, :only => [:show, :edit, :update, :destroy]
+  before_action :sort_column, :only => :index
 
   def index
-    @movies = Movie.all
+    @movies = Movie.order(sort_column)
   end
 
   def new
@@ -51,11 +52,15 @@ class MoviesController < ApplicationController
   private
 
   def movie_params
-    params.require(:movie).permit(:name, :release_year, :rating, :review)
+    params.require(:movie).permit(:name, :release_year, :rating, :review, :sort)
   end
 
   def set_movie
     @movie ||= Movie.find(params[:id])
+  end
+
+  def sort_column
+    params[:sort] || :id
   end
 
 end
