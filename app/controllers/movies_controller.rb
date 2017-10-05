@@ -11,9 +11,12 @@ class MoviesController < ApplicationController
   end
 
   def create
-    current_user.movies.create(movie_params)
-    @movie = Movie.last
-    redirect_to movie_path(@movie)
+    @movie = current_user.movies.create(movie_params)
+    if @movie.valid?
+      redirect_to movie_path(@movie)
+    else
+      render :new, :status => :unprocessable_entity
+    end
   end
 
   def show
@@ -30,7 +33,11 @@ class MoviesController < ApplicationController
       return render :text => "Update not allowed.", :status => :forbidden
     end
     @movie.update_attributes(movie_params)
-    redirect_to movie_path(@movie)
+    if @movie.valid?
+      redirect_to movie_path(@movie)
+    else
+      render :edit, :status => :unprocessable_entity
+    end
   end
 
   def destroy
@@ -52,8 +59,3 @@ class MoviesController < ApplicationController
   end
 
 end
-
-# :name
-# :release_year 
-# :rating 
-# :review 
