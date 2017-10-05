@@ -15,15 +15,22 @@ class MoviesController < ApplicationController
   end
 
   def show
+    @movie = Movie.find(params[:id])
   end
 
   def edit
+    @movie = Movie.find(params[:id])
+    if @movie.user != current_user
+      return render :text => "Edit not allowed.", :status => :forbidden
+    end
   end
 
   def update
+    @movie = Movie.find(params[:id])
   end
 
   def destroy
+    @movie = Movie.find(params[:id])
   end
 
   private
