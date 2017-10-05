@@ -1,0 +1,15 @@
+<br />
+<h1 style="text-align:center" class="neontitle">Add Your Own Movie Review!</h1>
+<br class="clear"/>
+
+<div class="col-xs-10 col-xs-offset-1 neon-box">
+
+  <%= simple_form_for @movie do |f| %>
+    <%= f.input :name %>
+    <%= f.input :release_year %>
+    <%= f.input :rating %>
+    <%= f.input :review %>
+    <br />
+    <%= f.submit "Add Review", :class => "btn neonbtn" %>
+  <% end %>
+</div>
