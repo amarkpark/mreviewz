@@ -12,7 +12,8 @@ class MoviesController < ApplicationController
 
   def create
     current_user.movies.create(movie_params)
-    redirect_to root_path
+    @movie = Movie.last
+    redirect_to movie_path(@movie)
   end
 
   def show
@@ -33,6 +34,11 @@ class MoviesController < ApplicationController
   end
 
   def destroy
+    if @movie.user != current_user
+      return render :text => "Not allowed to delete this review.", :status => :forbidden
+    end
+    @movie.destroy
+    redirect_to root_path
   end
 
   private
