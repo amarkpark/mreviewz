@@ -7,7 +7,7 @@
   <%= simple_form_for @movie do |f| %>
     <%= f.input :name %>
     <%= f.input :release_year %>
-    <%= f.input :rating, :collection => 0..5, :selected => 0 %>
+    <%= f.input :rating, :collection => 0..5, :selected => 0, include_blank: false, include_hidden: false %>
     <%= f.input :review %>
     <br />
     <%= f.submit "Add Review", :class => "btn neonbtn" %>

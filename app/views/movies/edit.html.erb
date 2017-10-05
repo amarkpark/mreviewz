@@ -1,5 +1,5 @@
 <br />
-<h1 style="text-align:center" class="neontitle">Edit <%= @movie %> Review!</h1>
+<h1 style="text-align:center" class="neontitle">Edit <%= @movie.name %> Review!</h1>
 <br class="clear"/>
 
 <div class="col-xs-10 col-xs-offset-1 neon-box">
@@ -7,7 +7,7 @@
   <%= simple_form_for @movie do |f| %>
     <%= f.input :name %>
     <%= f.input :release_year %>
-    <%= f.input :rating, :collection => 0..5, :selected => 0 %>
+    <%= f.input :rating, :collection => 0..5, include_blank: false, include_hidden: false %>
     <%= f.input :review %>
     <br />
     <%= f.submit "Update Review", :class => "btn neonbtn" %>

@@ -25,13 +25,17 @@ class MoviesController < ApplicationController
   end
 
   def update
+    if @movie.user != current_user
+      return render :text => "Update not allowed.", :status => :forbidden
+    end
+    @movie.update_attributes(movie_params)
+    redirect_to movie_path(@movie)
   end
 
   def destroy
   end
 
   private
-  helper_method :set_movie
 
   def movie_params
     params.require(:movie).permit(:name, :release_year, :rating, :review)
