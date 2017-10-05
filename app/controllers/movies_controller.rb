@@ -1,5 +1,6 @@
 class MoviesController < ApplicationController
   before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy]
+  before_action :set_movie, :only => [:show, :edit, :update, :destroy]
 
   def index
     @movies = Movie.all
@@ -15,28 +16,29 @@ class MoviesController < ApplicationController
   end
 
   def show
-    @movie = Movie.find(params[:id])
   end
 
   def edit
-    @movie = Movie.find(params[:id])
     if @movie.user != current_user
       return render :text => "Edit not allowed.", :status => :forbidden
     end
   end
 
   def update
-    @movie = Movie.find(params[:id])
   end
 
   def destroy
-    @movie = Movie.find(params[:id])
   end
 
   private
+  helper_method :set_movie
 
   def movie_params
     params.require(:movie).permit(:name, :release_year, :rating, :review)
+  end
+
+  def set_movie
+    @movie ||= Movie.find(params[:id])
   end
 
 end
