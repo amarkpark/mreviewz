@@ -1,4 +1,5 @@
 class MoviesController < ApplicationController
+  before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy]
 
   def index
     @movies = Movie.all
@@ -9,8 +10,20 @@ class MoviesController < ApplicationController
   end
 
   def create
-    Movie.create(movie_params)
+    current_user.movies.create(movie_params)
     redirect_to root_path
+  end
+
+  def show
+  end
+
+  def edit
+  end
+
+  def update
+  end
+
+  def destroy
   end
 
   private
